@@ -1,0 +1,5352 @@
+---
+openapi: 3.0.3
+info:
+  title: core API
+  version: 1.0.0-SNAPSHOT
+paths:
+  /api/admin/v1/auth:
+    get:
+      tags:
+      - Auth Admin Api V 1
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StaffResponse'
+    delete:
+      tags:
+      - Auth Admin Api V 1
+      responses:
+        "204":
+          description: No Content
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - CUSTOMER
+  /api/admin/v1/auth/check/{email}:
+    get:
+      tags:
+      - Auth Admin Api V 1
+      parameters:
+      - name: email
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+  /api/admin/v1/auth/firebase:
+    post:
+      tags:
+      - Auth Admin Api V 1
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                token:
+                  type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StaffResponse'
+  /api/admin/v1/auth/mock:
+    post:
+      tags:
+      - Auth Admin Api V 1
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StaffResponse'
+  /api/admin/v1/customers:
+    get:
+      tags:
+      - Customer Admin Api V 1
+      summary: List customers
+      description: List customers.
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Customer'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - SUPER ADMIN
+        - ADMIN
+        - DEFAULT
+    put:
+      tags:
+      - Customer Admin Api V 1
+      summary: Put a customer detail
+      description: Put a customer detail.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Customer'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Customer'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - SUPER ADMIN
+        - ADMIN
+  /api/admin/v1/customers/{code}:
+    get:
+      tags:
+      - Customer Admin Api V 1
+      summary: Get a customer detail
+      description: Get a customer detail.
+      parameters:
+      - name: code
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - SUPER ADMIN
+        - ADMIN
+        - DEFAULT
+  /api/admin/v1/dashboard:
+    get:
+      tags:
+      - Dashboard Api V 1
+      summary: Dashboard data
+      description: Dashboard data
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DashboardResponse'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - SUPER ADMIN
+        - ADMIN
+        - DEFAULT
+  /api/admin/v1/fixed-income-banks:
+    get:
+      tags:
+      - Fixed Income Bank Admin Api V 1
+      summary: List banks
+      description: List banks.
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FixedIncomeBank'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - SUPER ADMIN
+        - ADMIN
+        - DEFAULT
+    put:
+      tags:
+      - Fixed Income Bank Admin Api V 1
+      summary: Update banks
+      description: "Update banks, overwriting all attributes except `code`."
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/FixedIncomeBank'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FixedIncomeBank'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - SUPER ADMIN
+        - ADMIN
+    post:
+      tags:
+      - Fixed Income Bank Admin Api V 1
+      summary: Add banks
+      description: Add banks.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/FixedIncomeBank'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FixedIncomeBank'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - SUPER ADMIN
+        - ADMIN
+    delete:
+      tags:
+      - Fixed Income Bank Admin Api V 1
+      summary: Delete banks
+      description: Delete banks.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/FixedIncomeBank'
+        required: true
+      responses:
+        "204":
+          description: No Content
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - SUPER ADMIN
+  /api/admin/v1/fixed-income-banks/{code}:
+    get:
+      tags:
+      - Fixed Income Bank Admin Api V 1
+      summary: Get a bank detail
+      description: Get a bank detail.
+      parameters:
+      - name: code
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FixedIncomeBank'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - SUPER ADMIN
+        - ADMIN
+        - DEFAULT
+  /api/admin/v1/fixed-income-banks/{code}/logo:
+    post:
+      tags:
+      - Fixed Income Bank Admin Api V 1
+      summary: Add a logo to a bank
+      description: Add a logo to a bank.
+      parameters:
+      - name: code
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/MultipartFormDataInput'
+        required: true
+      responses:
+        "200":
+          description: OK
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - SUPER ADMIN
+        - ADMIN
+  /api/admin/v1/fractional-ownership:
+    get:
+      tags:
+      - Fractional Ownership Admin Api V 1
+      summary: List fractional ownership
+      description: List fractional ownership.
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FractionalOwnership'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - SUPER ADMIN
+        - ADMIN
+        - DEFAULT
+    put:
+      tags:
+      - Fractional Ownership Admin Api V 1
+      summary: Update fractional ownership
+      description: "Update fractional ownership, overwriting all attributes except\
+        \ `code`."
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/FractionalOwnership'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FractionalOwnership'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - SUPER ADMIN
+        - ADMIN
+    post:
+      tags:
+      - Fractional Ownership Admin Api V 1
+      summary: Add fractional ownership
+      description: Add fractional ownership with system-generated `code`.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/FractionalOwnership'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FractionalOwnership'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - SUPER ADMIN
+        - ADMIN
+    delete:
+      tags:
+      - Fractional Ownership Admin Api V 1
+      summary: Delete fractional ownership
+      description: Delete fractional ownership.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/FractionalOwnership'
+        required: true
+      responses:
+        "204":
+          description: No Content
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - SUPER ADMIN
+  /api/admin/v1/fractional-ownership/{code}:
+    get:
+      tags:
+      - Fractional Ownership Admin Api V 1
+      summary: Get a property detail
+      description: Get a property detail.
+      parameters:
+      - name: code
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FractionalOwnership'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - SUPER ADMIN
+        - ADMIN
+        - DEFAULT
+  /api/admin/v1/fractional-ownership/{code}/medias:
+    post:
+      tags:
+      - Fractional Ownership Admin Api V 1
+      summary: Add a media to a property
+      description: Add a media to a property.
+      parameters:
+      - name: code
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: index
+        in: query
+        schema:
+          format: int32
+          type: integer
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/MultipartFormDataInput'
+        required: true
+      responses:
+        "200":
+          description: OK
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - SUPER ADMIN
+        - ADMIN
+  /api/admin/v1/fractional-ownership/{code}/prospectus:
+    post:
+      tags:
+      - Fractional Ownership Admin Api V 1
+      summary: Add prospectus to a fractional ownership
+      description: Add prospectus to a fractional ownership.
+      parameters:
+      - name: code
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/MultipartFormDataInput'
+        required: true
+      responses:
+        "200":
+          description: OK
+  /api/admin/v1/installment/calculator:
+    post:
+      tags:
+      - Installment Api V 1
+      summary: Calculator property
+      description: Calculator property
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CalculatorRequest'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CalculatorResponse'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - SUPER ADMIN
+        - ADMIN
+  /api/admin/v1/installment/{code}/products:
+    get:
+      tags:
+      - Installment Api V 1
+      summary: List installment
+      description: List installment.
+      parameters:
+      - name: code
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InstallmentProduct'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - SUPER ADMIN
+        - ADMIN
+        - DEFAULT
+    put:
+      tags:
+      - Installment Api V 1
+      summary: List installment
+      description: List installment.
+      parameters:
+      - name: code
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WalletTx'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InstallmentProduct'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - SUPER ADMIN
+        - ADMIN
+  /api/admin/v1/installment/{code}/properties:
+    get:
+      tags:
+      - Installment Api V 1
+      summary: List installment
+      description: List installment.
+      parameters:
+      - name: code
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InstallmentProperty'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - SUPER ADMIN
+        - ADMIN
+        - DEFAULT
+    post:
+      tags:
+      - Installment Api V 1
+      summary: Add property transactions of installment
+      description: Add property transactions of installment
+      parameters:
+      - name: code
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TxnProperty'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TxnProperty'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - SUPER ADMIN
+        - ADMIN
+  /api/admin/v1/kyc:
+    get:
+      tags:
+      - Kyc Admin Api V 1
+      summary: List customers foreigner
+      description: List customers. foreigner
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Customer'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - SUPER ADMIN
+        - ADMIN
+        - DEFAULT
+    post:
+      tags:
+      - Kyc Admin Api V 1
+      summary: Put a customer detail approval Kyc
+      description: Put a customer detail.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/KycApprovalRequest'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - SUPER ADMIN
+        - ADMIN
+  /api/admin/v1/lenders:
+    get:
+      tags:
+      - Lender Admin Api V 1
+      summary: List lenders
+      description: List lenders.
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Lender'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - SUPER ADMIN
+        - ADMIN
+        - DEFAULT
+    put:
+      tags:
+      - Lender Admin Api V 1
+      summary: Update lenders
+      description: "Update lenders, overwriting all attributes except `code`."
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Lender'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Lender'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - SUPER ADMIN
+        - ADMIN
+    post:
+      tags:
+      - Lender Admin Api V 1
+      summary: Add lenders
+      description: Add lenders.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Lender'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Lender'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - SUPER ADMIN
+        - ADMIN
+    delete:
+      tags:
+      - Lender Admin Api V 1
+      summary: Delete lenders
+      description: Delete lenders.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Lender'
+        required: true
+      responses:
+        "204":
+          description: No Content
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - SUPER ADMIN
+  /api/admin/v1/lenders/{code}:
+    get:
+      tags:
+      - Lender Admin Api V 1
+      summary: Get a lender detail
+      description: Get a lender detail.
+      parameters:
+      - name: code
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Lender'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - SUPER ADMIN
+        - ADMIN
+        - DEFAULT
+  /api/admin/v1/lenders/{code}/logo:
+    post:
+      tags:
+      - Lender Admin Api V 1
+      summary: Add a logo to a lender
+      description: Add a logo to a lender.
+      parameters:
+      - name: code
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/MultipartFormDataInput'
+        required: true
+      responses:
+        "200":
+          description: OK
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - SUPER ADMIN
+        - ADMIN
+  /api/admin/v1/menu-authorities:
+    get:
+      tags:
+      - Menu Authority Admin Api V 1
+      summary: List menu authorities
+      description: List menu authorities.
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MenuAuthority'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - SUPER ADMIN
+        - ADMIN
+        - DEFAULT
+    post:
+      tags:
+      - Menu Authority Admin Api V 1
+      summary: Add menu authorities
+      description: Add menu authorities.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MenuAuthority'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MenuAuthority'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - SUPER ADMIN
+        - ADMIN
+  /api/admin/v1/notifications:
+    get:
+      tags:
+      - Notification Admin Api V 1
+      summary: List notifications by staff
+      description: List notifications by staff.
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NotificationResponseStaff'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - SUPER ADMIN
+        - ADMIN
+        - DEFAULT
+  /api/admin/v1/notifications/{code}:
+    get:
+      tags:
+      - Notification Admin Api V 1
+      summary: Get a notification detail
+      description: Get a notification detail.
+      parameters:
+      - name: code
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotificationStaff'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - SUPER ADMIN
+        - ADMIN
+        - DEFAULT
+  /api/admin/v1/notifications/{code}/read:
+    post:
+      tags:
+      - Notification Admin Api V 1
+      summary: Notification read by staff
+      description: Notification read by staff.
+      parameters:
+      - name: code
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NotificationStaff'
+      responses:
+        "201":
+          description: Created
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - SUPER ADMIN
+        - ADMIN
+        - DEFAULT
+  /api/admin/v1/products:
+    get:
+      tags:
+      - Product Admin Api V 1
+      summary: List products
+      description: List products.
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - SUPER ADMIN
+        - ADMIN
+        - DEFAULT
+    put:
+      tags:
+      - Product Admin Api V 1
+      summary: Update products
+      description: "Update products, overwriting all attributes except `code`."
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Product'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - SUPER ADMIN
+        - ADMIN
+    post:
+      tags:
+      - Product Admin Api V 1
+      summary: Add products
+      description: Add products with system-generated `code`.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Product'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - SUPER ADMIN
+        - ADMIN
+    delete:
+      tags:
+      - Product Admin Api V 1
+      summary: Delete products
+      description: Delete products.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Product'
+        required: true
+      responses:
+        "204":
+          description: No Content
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - SUPER ADMIN
+  /api/admin/v1/products/{code}:
+    get:
+      tags:
+      - Product Admin Api V 1
+      summary: Get a product detail
+      description: Get a product detail.
+      parameters:
+      - name: code
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - SUPER ADMIN
+        - ADMIN
+        - DEFAULT
+  /api/admin/v1/products/{code}/fact-sheet:
+    post:
+      tags:
+      - Product Admin Api V 1
+      summary: Add fact sheet to a product
+      description: Add fact sheet to a product.
+      parameters:
+      - name: code
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/MultipartFormDataInput'
+        required: true
+      responses:
+        "200":
+          description: OK
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - SUPER ADMIN
+        - ADMIN
+  /api/admin/v1/products/{code}/logo:
+    post:
+      tags:
+      - Product Admin Api V 1
+      summary: Add a logo to a product
+      description: Add a logo to a product.
+      parameters:
+      - name: code
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/MultipartFormDataInput'
+        required: true
+      responses:
+        "200":
+          description: OK
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - SUPER ADMIN
+        - ADMIN
+  /api/admin/v1/products/{code}/prospectus:
+    post:
+      tags:
+      - Product Admin Api V 1
+      summary: Add prospectus to a product
+      description: Add prospectus to a product.
+      parameters:
+      - name: code
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/MultipartFormDataInput'
+        required: true
+      responses:
+        "200":
+          description: OK
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - SUPER ADMIN
+        - ADMIN
+  /api/admin/v1/properties:
+    get:
+      tags:
+      - Property Admin Api V 1
+      summary: List properties
+      description: List properties.
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Property'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - SUPER ADMIN
+        - ADMIN
+        - DEFAULT
+    put:
+      tags:
+      - Property Admin Api V 1
+      summary: Update properties
+      description: "Update properties, overwriting all attributes except `code`."
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Property'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Property'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - SUPER ADMIN
+        - ADMIN
+    post:
+      tags:
+      - Property Admin Api V 1
+      summary: Add properties
+      description: Add properties with system-generated `code`.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Property'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Property'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - SUPER ADMIN
+        - ADMIN
+    delete:
+      tags:
+      - Property Admin Api V 1
+      summary: Delete properties
+      description: Delete properties.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Property'
+        required: true
+      responses:
+        "204":
+          description: No Content
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - SUPER ADMIN
+  /api/admin/v1/properties/{code}:
+    get:
+      tags:
+      - Property Admin Api V 1
+      summary: Get a property detail
+      description: Get a property detail.
+      parameters:
+      - name: code
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Property'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - SUPER ADMIN
+        - ADMIN
+        - DEFAULT
+  /api/admin/v1/properties/{code}/medias:
+    post:
+      tags:
+      - Property Admin Api V 1
+      summary: Add a media to a property
+      description: Add a media to a property.
+      parameters:
+      - name: code
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: index
+        in: query
+        schema:
+          format: int32
+          type: integer
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/MultipartFormDataInput'
+        required: true
+      responses:
+        "200":
+          description: OK
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - SUPER ADMIN
+        - ADMIN
+  /api/admin/v1/publishers:
+    get:
+      tags:
+      - Publisher Admin Api V 1
+      summary: List publishers
+      description: List publishers.
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Publisher'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - SUPER ADMIN
+        - ADMIN
+        - DEFAULT
+    put:
+      tags:
+      - Publisher Admin Api V 1
+      summary: Update publishers
+      description: "Update publishers, overwriting all attributes except `code`."
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Publisher'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Publisher'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - SUPER ADMIN
+        - ADMIN
+    post:
+      tags:
+      - Publisher Admin Api V 1
+      summary: Add publishers
+      description: Add publishers.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Publisher'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Publisher'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - SUPER ADMIN
+        - ADMIN
+    delete:
+      tags:
+      - Publisher Admin Api V 1
+      summary: Delete publishers
+      description: Delete publishers.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Publisher'
+        required: true
+      responses:
+        "204":
+          description: No Content
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - SUPER ADMIN
+  /api/admin/v1/publishers/{code}:
+    get:
+      tags:
+      - Publisher Admin Api V 1
+      summary: Get a publisher detail
+      description: Get a publisher detail.
+      parameters:
+      - name: code
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Publisher'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - SUPER ADMIN
+        - ADMIN
+        - DEFAULT
+  /api/admin/v1/publishers/{code}/logo:
+    post:
+      tags:
+      - Publisher Admin Api V 1
+      summary: Add a logo to a Publisher
+      description: Add a logo to a Publisher.
+      parameters:
+      - name: code
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/MultipartFormDataInput'
+        required: true
+      responses:
+        "200":
+          description: OK
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - SUPER ADMIN
+        - ADMIN
+  /api/admin/v1/roles:
+    get:
+      tags:
+      - Role Admin Api V 1
+      summary: List roles
+      description: List roles.
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Role'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - SUPER ADMIN
+        - ADMIN
+        - DEFAULT
+    put:
+      tags:
+      - Role Admin Api V 1
+      summary: Update roles
+      description: "Update roles, overwriting all attributes except `code`."
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Role'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Role'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - SUPER ADMIN
+        - ADMIN
+    post:
+      tags:
+      - Role Admin Api V 1
+      summary: Add roles
+      description: Add roles with system-generated `code`.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Role'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Role'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - SUPER ADMIN
+        - ADMIN
+    delete:
+      tags:
+      - Role Admin Api V 1
+      summary: Delete roles
+      description: Delete roles.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Role'
+        required: true
+      responses:
+        "204":
+          description: No Content
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - SUPER ADMIN
+  /api/admin/v1/roles/{code}:
+    get:
+      tags:
+      - Role Admin Api V 1
+      summary: Get a role detail
+      description: Get a role detail.
+      parameters:
+      - name: code
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Role'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - SUPER ADMIN
+        - ADMIN
+        - DEFAULT
+  /api/admin/v1/staffs:
+    get:
+      tags:
+      - Staff Admin Api V 1
+      summary: List staffs
+      description: List staffs.
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Staff'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - SUPER ADMIN
+        - ADMIN
+        - DEFAULT
+    put:
+      tags:
+      - Staff Admin Api V 1
+      summary: Update staffs
+      description: "Update staffs, overwriting all attributes except `code`."
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Staff'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Staff'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - SUPER ADMIN
+        - ADMIN
+    post:
+      tags:
+      - Staff Admin Api V 1
+      summary: Add staffs
+      description: Add staffs with system-generated `code`.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Staff'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Staff'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - SUPER ADMIN
+        - ADMIN
+    delete:
+      tags:
+      - Staff Admin Api V 1
+      summary: Delete staffs
+      description: Delete staffs.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Staff'
+        required: true
+      responses:
+        "204":
+          description: No Content
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - SUPER ADMIN
+  /api/admin/v1/staffs/{code}:
+    get:
+      tags:
+      - Staff Admin Api V 1
+      summary: Get a staff detail
+      description: Get a staff detail.
+      parameters:
+      - name: code
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Staff'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - SUPER ADMIN
+        - ADMIN
+        - DEFAULT
+  /api/admin/v1/txns/products:
+    get:
+      tags:
+      - Txn Product Admin Api V 1
+      summary: List product transactions
+      description: List product transactions.
+      parameters:
+      - name: customer
+        in: query
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TxnProduct'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - SUPER ADMIN
+        - ADMIN
+        - DEFAULT
+  /api/admin/v1/txns/products/{code}:
+    get:
+      tags:
+      - Txn Product Admin Api V 1
+      summary: Detail product transactions
+      description: Detail product transactions.
+      parameters:
+      - name: code
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TxnProduct'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - SUPER ADMIN
+        - ADMIN
+        - DEFAULT
+    put:
+      tags:
+      - Txn Product Admin Api V 1
+      summary: Update a product transaction
+      description: Update a product transaction. At the moment simply updates the
+        status.
+      parameters:
+      - name: code
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TxnProductRequest'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TxnProduct'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - SUPER ADMIN
+        - ADMIN
+  /api/admin/v1/txns/properties:
+    get:
+      tags:
+      - Txn Property Admin Api V 1
+      summary: List property transactions
+      description: List property transactions.
+      parameters:
+      - name: customer
+        in: query
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TxnProperty'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - SUPER ADMIN
+        - ADMIN
+        - DEFAULT
+  /api/admin/v1/txns/properties/{code}:
+    get:
+      tags:
+      - Txn Property Admin Api V 1
+      summary: Detail property transactions
+      description: Detail property transactions.
+      parameters:
+      - name: code
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TxnProperty'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - SUPER ADMIN
+        - ADMIN
+        - DEFAULT
+    put:
+      tags:
+      - Txn Property Admin Api V 1
+      summary: Update a property transaction
+      description: Update a property transaction. At the moment simply updates the
+        status.
+      parameters:
+      - name: code
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TxnPropertyRequest'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TxnProperty'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - SUPER ADMIN
+        - ADMIN
+  /api/admin/v1/wallet/top-ups:
+    get:
+      tags:
+      - Wallet Api V 1
+      summary: List request top up wallet for a Foreigner or wallet manual kind
+      description: List request wallet.Kind is manual and walletTx.status is Pending
+        need approve
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/WalletTx'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - SUPER ADMIN
+        - ADMIN
+        - DEFAULT
+  /api/admin/v1/wallet/top-ups/{code}/approval:
+    post:
+      tags:
+      - Wallet Api V 1
+      summary: Approval for a request top up
+      description: Approval for a request top up
+      parameters:
+      - name: code
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WalletTx'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WalletTx'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - SUPER ADMIN
+        - ADMIN
+  /api/admin/v1/wallet/withdrawals:
+    get:
+      tags:
+      - Wallet Api V 1
+      summary: List request withdraw request
+      description: List request withdraw request
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/WalletTx'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - SUPER ADMIN
+        - ADMIN
+        - DEFAULT
+  /api/admin/v1/wallet/withdrawals/{code}/approval:
+    post:
+      tags:
+      - Wallet Api V 1
+      summary: Approval for a request top
+      description: Approval for a request top
+      parameters:
+      - name: code
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WalletTx'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WalletTx'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - SUPER ADMIN
+        - ADMIN
+  /api/admin/v1/withdrawal-banks:
+    get:
+      tags:
+      - Withdrawal Bank Admin Api V 1
+      summary: List banks
+      description: List banks.
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/WithdrawalBank'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - SUPER ADMIN
+        - ADMIN
+        - DEFAULT
+    put:
+      tags:
+      - Withdrawal Bank Admin Api V 1
+      summary: Update banks
+      description: "Update banks, overwriting all attributes except `code`."
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/WithdrawalBank'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/WithdrawalBank'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - SUPER ADMIN
+        - ADMIN
+    post:
+      tags:
+      - Withdrawal Bank Admin Api V 1
+      summary: Add banks
+      description: Add banks.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/WithdrawalBank'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/WithdrawalBank'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - SUPER ADMIN
+        - ADMIN
+    delete:
+      tags:
+      - Withdrawal Bank Admin Api V 1
+      summary: Delete banks
+      description: Delete banks.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/WithdrawalBank'
+        required: true
+      responses:
+        "204":
+          description: No Content
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - SUPER ADMIN
+  /api/admin/v1/withdrawal-banks/{code}:
+    get:
+      tags:
+      - Withdrawal Bank Admin Api V 1
+      summary: Get a bank detail
+      description: Get a bank detail.
+      parameters:
+      - name: code
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WithdrawalBank'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - SUPER ADMIN
+        - ADMIN
+        - DEFAULT
+  /api/admin/v1/withdrawal-banks/{code}/logo:
+    post:
+      tags:
+      - Withdrawal Bank Admin Api V 1
+      summary: Add a logo to a bank
+      description: Add a logo to a bank.
+      parameters:
+      - name: code
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/MultipartFormDataInput'
+        required: true
+      responses:
+        "200":
+          description: OK
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - SUPER ADMIN
+        - ADMIN
+  /api/v1/auth:
+    get:
+      tags:
+      - Auth Api V 1
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerResponse'
+    delete:
+      tags:
+      - Auth Api V 1
+      responses:
+        "204":
+          description: No Content
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - CUSTOMER
+  /api/v1/auth/check:
+    post:
+      tags:
+      - Auth Api V 1
+      summary: Check whether email exists
+      description: "Check whether email exists. If it doesn't, will send a PIN to\
+        \ the email."
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+      responses:
+        "200":
+          description: OK
+  /api/v1/auth/firebase:
+    post:
+      tags:
+      - Auth Api V 1
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                token:
+                  type: string
+                country:
+                  type: string
+                locale:
+                  type: string
+                timezone:
+                  type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerResponse'
+  /api/v1/auth/mock:
+    post:
+      tags:
+      - Auth Api V 1
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                token:
+                  type: string
+                country:
+                  type: string
+                locale:
+                  type: string
+                timezone:
+                  type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerResponse'
+  /api/v1/auth/verify/email:
+    post:
+      tags:
+      - Auth Api V 1
+      summary: Verify customer email
+      description: Verify customer email.
+      responses:
+        "201":
+          description: Created
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - CUSTOMER
+  /api/v1/auth/verify/email/pin:
+    post:
+      tags:
+      - Auth Api V 1
+      summary: Verify PIN for customer email
+      description: Verify PIN for customer email.
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                pin:
+                  type: string
+      responses:
+        "201":
+          description: Created
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - CUSTOMER
+  /api/v1/auth/verify/kyc:
+    post:
+      tags:
+      - Auth Api V 1
+      summary: Verify Kyc
+      description: Verify Kyc
+      responses:
+        "201":
+          description: Created
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - CUSTOMER
+  /api/v1/auth/verify/kyc/pin:
+    post:
+      tags:
+      - Auth Api V 1
+      summary: Verify KYC PIN for customer email
+      description: Verify KYC PIN for customer email.
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                pin:
+                  type: string
+      responses:
+        "201":
+          description: Created
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - CUSTOMER
+  /api/v1/auth/verify/mobile:
+    post:
+      tags:
+      - Auth Api V 1
+      summary: Verify token for customer mobile
+      description: Will call Firebase to confirm that mobile number is verified.
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                token:
+                  type: string
+      responses:
+        "201":
+          description: Created
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - CUSTOMER
+  /api/v1/banks:
+    post:
+      tags:
+      - Bank Api V 1
+      summary: Add a bank account
+      description: "Add a bank account. Returns the index of the created entity in\
+        \ the list of bank accounts (it's called `code` and the type is string, but\
+        \ internally it's used as a zero-based numerical index)."
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerBank'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CodeResponse'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - CUSTOMER
+  /api/v1/banks/support:
+    get:
+      tags:
+      - Bank Api V 1
+      summary: Support data for bank accounts
+      description: Support data for bank accounts.
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankSupportResponse'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - CUSTOMER
+  /api/v1/banks/{code}:
+    put:
+      tags:
+      - Bank Api V 1
+      summary: Update a bank account
+      description: Update a bank account. `code` is actually the index.
+      parameters:
+      - name: code
+        in: path
+        required: true
+        schema:
+          format: int32
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerBank'
+        required: true
+      responses:
+        "204":
+          description: No Content
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - CUSTOMER
+    delete:
+      tags:
+      - Bank Api V 1
+      summary: Delete a bank account
+      description: Delete a bank account. `code` is actually the index.
+      parameters:
+      - name: code
+        in: path
+        required: true
+        schema:
+          format: int32
+          type: integer
+      responses:
+        "204":
+          description: No Content
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - CUSTOMER
+  /api/v1/fractional-ownership:
+    get:
+      tags:
+      - Fractional Ownership Api V 1
+      summary: List FractionalOwnerships
+      description: List FractionalOwnerships.
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FractionalOwnership'
+  /api/v1/fractional-ownership/{code}:
+    get:
+      tags:
+      - Fractional Ownership Api V 1
+      summary: Get a FractionalOwnership detail
+      description: Get a FractionalOwnership detail.
+      parameters:
+      - name: code
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FractionalOwnership'
+  /api/v1/installment/{code}/products:
+    get:
+      tags:
+      - Installment Api V 1
+      summary: List installment product
+      description: List installment.
+      parameters:
+      - name: code
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InstallmentProduct'
+  /api/v1/installment/{code}/properties:
+    get:
+      tags:
+      - Installment Api V 1
+      summary: List installment property
+      description: List installment.
+      parameters:
+      - name: code
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InstallmentProperty'
+  /api/v1/kyc/biometric-verification/callback:
+    post:
+      tags:
+      - Kyc Api V 1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties:
+                type: object
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - CUSTOMER
+  /api/v1/kyc/biometric-verification/result:
+    get:
+      tags:
+      - Kyc Api V 1
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - CUSTOMER
+  /api/v1/kyc/face-comparison/callback:
+    post:
+      tags:
+      - Kyc Api V 1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties:
+                type: object
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - CUSTOMER
+  /api/v1/kyc/ocr:
+    post:
+      tags:
+      - Kyc Api V 1
+      summary: Submit image to Xendit for OCR
+      description: Submit KTP/passport image to Xendit for OCR.
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/MultipartFormDataInput'
+        required: true
+      responses:
+        "200":
+          description: OK
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - CUSTOMER
+  /api/v1/kyc/ocr/callback:
+    post:
+      tags:
+      - Kyc Api V 1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OcrCallbackRequest'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OcrCallbackRequest'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - CUSTOMER
+  /api/v1/kyc/ocr/result:
+    get:
+      tags:
+      - Kyc Api V 1
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - CUSTOMER
+  /api/v1/kyc/rdf-account/callback:
+    post:
+      tags:
+      - Kyc Api V 1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties:
+                type: object
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - CUSTOMER
+  /api/v1/kyc/rdf-customer:
+    post:
+      tags:
+      - Kyc Api V 1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Customer'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - CUSTOMER
+  /api/v1/kyc/rdf-customer/callback:
+    post:
+      tags:
+      - Kyc Api V 1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties:
+                type: object
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - CUSTOMER
+  /api/v1/kyc/rdf-customer/result:
+    get:
+      tags:
+      - Kyc Api V 1
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - CUSTOMER
+  /api/v1/me:
+    put:
+      tags:
+      - Me Api V 1
+      summary: Update current customer
+      description: "Update current customer, only the barebones."
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Customer'
+        required: true
+      responses:
+        "204":
+          description: No Content
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - CUSTOMER
+  /api/v1/me/avatar:
+    post:
+      tags:
+      - Me Api V 1
+      summary: Add profile picture
+      description: Add profile picture.
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/MultipartFormDataInput'
+        required: true
+      responses:
+        "200":
+          description: OK
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - CUSTOMER
+  /api/v1/me/fcms:
+    post:
+      tags:
+      - Me Api V 1
+      summary: Add FCM token to current customer
+      description: Add FCM token to current customer.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Fcm'
+        required: true
+      responses:
+        "201":
+          description: Created
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - CUSTOMER
+  /api/v1/me/kyc:
+    put:
+      tags:
+      - Me Api V 1
+      summary: Submit KYC data for current customer
+      description: "Submit KYC data for current customer. The data goes to temporary\
+        \ storage, and will be approved by admin using another API."
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/MultipartFormDataInput'
+        required: true
+      responses:
+        "200":
+          description: OK
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - CUSTOMER
+  /api/v1/me/kyc/foreigner:
+    put:
+      tags:
+      - Me Api V 1
+      summary: Submit KYC data for current customer
+      description: "Submit KYC data for current customer. The data goes to temporary\
+        \ storage, and will be approved by admin using another API."
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/MultipartFormDataInput'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - CUSTOMER
+  /api/v1/me/kyc/local:
+    put:
+      tags:
+      - Me Api V 1
+      summary: Submit KYC data for current customer
+      description: "Submit KYC data for current customer. The data goes to temporary\
+        \ storage, and will be approved by admin using another API."
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/MultipartFormDataInput'
+        required: true
+      responses:
+        "200":
+          description: OK
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - CUSTOMER
+  /api/v1/me/{code}/deleted:
+    post:
+      tags:
+      - Me Api V 1
+      summary: Account deletion for customer
+      description: Account deletion for customer.
+      parameters:
+      - name: code
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Customer'
+      responses:
+        "201":
+          description: Created
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - CUSTOMER
+  /api/v1/notifications:
+    get:
+      tags:
+      - Notification Api V 1
+      summary: List notifications by customer
+      description: List notifications by customer.
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NotificationResponseCustomer'
+  /api/v1/notifications/{code}:
+    get:
+      tags:
+      - Notification Api V 1
+      summary: Get a notification detail
+      description: Get a notification detail.
+      parameters:
+      - name: code
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotificationCustomer'
+  /api/v1/notifications/{code}/read:
+    post:
+      tags:
+      - Notification Api V 1
+      summary: Notification read by customer
+      description: Notification read by customer.
+      parameters:
+      - name: code
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NotificationCustomer'
+      responses:
+        "201":
+          description: Created
+  /api/v1/payments:
+    post:
+      tags:
+      - Payment Api V 1
+      summary: List products
+      description: List products.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentRequest'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Wallet'
+  /api/v1/payments/disbursement/callback:
+    post:
+      tags:
+      - Payment Api V 1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties:
+                type: object
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+  /api/v1/products:
+    get:
+      tags:
+      - Product Api V 1
+      summary: List products
+      description: List products.
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+  /api/v1/products/{code}:
+    get:
+      tags:
+      - Product Api V 1
+      summary: Get a product detail
+      description: Get a product detail.
+      parameters:
+      - name: code
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+  /api/v1/properties:
+    get:
+      tags:
+      - Property Api V 1
+      summary: List properties
+      description: List properties.
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Property'
+  /api/v1/properties/{code}:
+    get:
+      tags:
+      - Property Api V 1
+      summary: Get a property detail
+      description: Get a property detail.
+      parameters:
+      - name: code
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Property'
+  /api/v1/properties/{code}/support:
+    get:
+      tags:
+      - Property Api V 1
+      summary: Support data for a property detail
+      description: Support data for a property detail.
+      parameters:
+      - name: code
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PropertySupportResponse'
+  /api/v1/txns/products:
+    get:
+      tags:
+      - Txn Product Api V 1
+      summary: List product transactions
+      description: List product transactions.
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TxnProduct'
+    post:
+      tags:
+      - Txn Product Api V 1
+      summary: Add a product transaction
+      description: "Add a product transaction. In the app, this is the Enquire button."
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TxnProduct'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TxnProduct'
+  /api/v1/txns/products/owned:
+    get:
+      tags:
+      - Txn Product Api V 1
+      summary: List product owned by customer
+      description: List product owned by customer.
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TxnProduct'
+  /api/v1/txns/products/{code}:
+    get:
+      tags:
+      - Txn Product Api V 1
+      summary: Get a product transaction detail
+      description: Get a product transaction detail.
+      parameters:
+      - name: code
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TxnProduct'
+  /api/v1/txns/properties:
+    get:
+      tags:
+      - Txn Property Api V 1
+      summary: List property transactions
+      description: List property transactions.
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TxnProperty'
+    post:
+      tags:
+      - Txn Property Api V 1
+      summary: Add a property transaction
+      description: "Add a property transaction. In the app, this is the Express Interest\
+        \ button."
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TxnProperty'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TxnProperty'
+  /api/v1/txns/properties/owned:
+    get:
+      tags:
+      - Txn Property Api V 1
+      summary: List property owned by customer
+      description: List property owned by customer.
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TxnProperty'
+  /api/v1/txns/properties/{code}:
+    get:
+      tags:
+      - Txn Property Api V 1
+      summary: Get a property transaction detail
+      description: Get a property transaction detail.
+      parameters:
+      - name: code
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TxnProperty'
+  /api/v1/wallet:
+    get:
+      tags:
+      - Wallet Api V 1
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Wallet'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - CUSTOMER
+  /api/v1/wallet/payment/callback:
+    post:
+      tags:
+      - Wallet Api V 1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties:
+                type: object
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Wallet'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - CUSTOMER
+  /api/v1/wallet/rdf/support:
+    get:
+      tags:
+      - Wallet Api V 1
+      summary: Support data for RDF account creation
+      description: List support data for RDF account creation. The data is fetched
+        from `Info` with code `RSD_*`.
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RdfSupportResponse'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - CUSTOMER
+  /api/v1/wallet/top-ups:
+    post:
+      tags:
+      - Wallet Api V 1
+      summary: Top up
+      description: Top up to customer wallet.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WalletRequest'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WalletTx'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - CUSTOMER
+  /api/v1/wallet/top-ups/{code}/evidences:
+    post:
+      tags:
+      - Wallet Api V 1
+      summary: Add a nota for proof of payment
+      description: Add a for proof of payment.
+      parameters:
+      - name: code
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/MultipartFormDataInput'
+        required: true
+      responses:
+        "200":
+          description: OK
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - CUSTOMER
+  /api/v1/wallet/txs/completed:
+    get:
+      tags:
+      - Wallet Api V 1
+      summary: List completed wallet transaction
+      description: List completed wallet transaction.
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/WalletTx'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - CUSTOMER
+  /api/v1/wallet/txs/pending:
+    get:
+      tags:
+      - Wallet Api V 1
+      summary: List pending wallet transaction
+      description: List pending wallet transaction.
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/WalletTx'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - CUSTOMER
+  /api/v1/wallet/txs/{code}:
+    get:
+      tags:
+      - Wallet Api V 1
+      summary: Get a history transaction detail
+      description: Get a history transaction detail.
+      parameters:
+      - name: code
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WalletTx'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - CUSTOMER
+  /api/v1/wallet/withdrawals:
+    post:
+      tags:
+      - Wallet Api V 1
+      summary: Withdraw
+      description: Withdraw from customer wallet.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WalletRequest'
+        required: true
+      responses:
+        "201":
+          description: Created
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - CUSTOMER
+  /ping:
+    get:
+      tags:
+      - Ping Api
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: string
+components:
+  schemas:
+    AbstractBank:
+      description: Many places have references to a 'bank'. This is the shared properties.
+      type: object
+      properties:
+        id:
+          format: int64
+          type: integer
+        code:
+          type: string
+        name:
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+        logo:
+          $ref: '#/components/schemas/Media'
+        description:
+          type: string
+        status:
+          $ref: '#/components/schemas/BankStatus'
+    AbstractNotification:
+      description: Many places have references to a 'notification'. This is the shared
+        properties.
+      type: object
+      properties:
+        id:
+          format: int64
+          type: integer
+        code:
+          type: string
+        title:
+          type: string
+        message:
+          type: string
+        read:
+          type: boolean
+        codeKind:
+          type: string
+        media:
+          $ref: '#/components/schemas/Media'
+        createdAt:
+          format: date-time
+          type: string
+        kind:
+          $ref: '#/components/schemas/NotificationKind'
+    BankStatus:
+      enum:
+      - 0
+      - 200
+      - 400
+      type: string
+    BankSupportResponse:
+      description: Support data for bank accounts.
+      type: object
+      properties:
+        withdrawalBanks:
+          type: array
+          items:
+            $ref: '#/components/schemas/WithdrawalBank'
+    CalculatorRequest:
+      type: object
+      properties:
+        price:
+          type: integer
+        deposit:
+          type: integer
+        interest:
+          type: number
+        tenor:
+          format: int32
+          type: integer
+        dailyRate:
+          type: integer
+        occupancyRate:
+          type: number
+    CalculatorResponse:
+      type: object
+      properties:
+        annualInterest:
+          type: integer
+        monthlyInterest:
+          type: integer
+        monthlyPrincipal:
+          type: integer
+        monthlyPayment:
+          type: integer
+        monthlyYield:
+          type: integer
+        netToYou:
+          type: integer
+    CodeResponse:
+      description: "Generic container to return the identifier of an entity, for example,\
+        \ after being created. The identifier is NOT a DB PK (as we don't expose them).\
+        \ It's usually a `code` or even a list index."
+      type: object
+      properties:
+        code:
+          type: string
+    Customer:
+      description: Customer.
+      required:
+      - country
+      - locale
+      - timezone
+      type: object
+      properties:
+        id:
+          format: int64
+          type: integer
+        code:
+          type: string
+        name:
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+        email:
+          type: string
+          example: thomas@wiradikusuma.com
+        mobile:
+          description: "Prefixed with country code, without plus sign."
+          type: string
+          example: "6288812345"
+        country:
+          type: string
+          example: ID
+        salutation:
+          $ref: '#/components/schemas/Salutation'
+        locale:
+          description: Language code.
+          maxLength: 20
+          type: string
+          example: en
+        timezone:
+          description: Timezone in the format understood by Java.
+          maxLength: 50
+          type: string
+          example: Asia/Jakarta
+        fcms:
+          type: array
+          items:
+            $ref: '#/components/schemas/Fcm'
+        wallet:
+          $ref: '#/components/schemas/Wallet'
+        lastName:
+          description: "Name field is for first name, this one is for last name."
+          maxLength: 100
+          type: string
+          example: Wayne
+        rawEmail:
+          description: Unverified email.
+          type: string
+          example: thomas@wiradikusuma.com
+        rawMobile:
+          description: "Unverified mobile. Prefixed with country code, without plus\
+            \ sign."
+          type: string
+          example: "6288812345"
+        password:
+          type: string
+        foreigner:
+          description: Whether this customer is non-Indonesian.
+          type: boolean
+        nik:
+          description: NIK. Digits only.
+          maxLength: 16
+          minLength: 16
+          type: string
+          example: "1234567890123456"
+        gender:
+          $ref: '#/components/schemas/Gender'
+        marital:
+          $ref: '#/components/schemas/Marital'
+        religion:
+          $ref: '#/components/schemas/Religion'
+        birthplace:
+          type: string
+        motherName:
+          type: string
+        dob:
+          format: date
+          type: string
+        address:
+          type: string
+        district:
+          type: string
+        village:
+          type: string
+        rtRw:
+          type: string
+        postalCode:
+          type: string
+        job:
+          type: string
+        jobIndustry:
+          $ref: '#/components/schemas/JobIndustry'
+        expiryNik:
+          type: string
+        issuingCityNik:
+          type: string
+        bankBranchOpeningCity:
+          type: string
+        monthlyIncomeRange:
+          type: string
+        education:
+          type: string
+        deleted:
+          type: boolean
+        npwp:
+          description: NPWP. Digits only.
+          maxLength: 16
+          minLength: 16
+          type: string
+          example: "1234567890123456"
+        avatar:
+          $ref: '#/components/schemas/Media'
+        banks:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomerBank'
+        openAccountReason:
+          $ref: '#/components/schemas/OpenAccountReason'
+        sourceOfFund:
+          $ref: '#/components/schemas/SourceOfFund'
+        kyc:
+          allOf:
+          - $ref: '#/components/schemas/CustomerKyc'
+          - description: Null if there's no KYC data to process.
+        xendit:
+          $ref: '#/components/schemas/CustomerXendit'
+        customerPassport:
+          allOf:
+          - $ref: '#/components/schemas/CustomerPassport'
+          - description: Null if there's no use Ocr Passport
+        firstName:
+          type: string
+        middleName:
+          type: string
+    CustomerBank:
+      description: "Bank registered under customer, for withdrawals."
+      type: object
+      properties:
+        account:
+          type: string
+        name:
+          type: string
+        bankCode:
+          description: "Bank code, must exist in WithdrawalBank. Not object relationship\
+            \ because this model is serialized as JSON."
+          type: string
+        overseas:
+          description: Whether the account belongs to an overseas bank.
+          type: boolean
+        swift:
+          description: "For overseas bank account, SWIFT code is required."
+          type: string
+    CustomerKyc:
+      description: Temporary storage for user-submitted KYC data.
+      type: object
+      properties:
+        nik:
+          type: string
+        name:
+          type: string
+        lastName:
+          type: string
+        dob:
+          format: date
+          type: string
+        birthplace:
+          type: string
+        address:
+          type: string
+        passportCountry:
+          type: string
+        passportNumber:
+          type: string
+        passportIssueDate:
+          format: date
+          type: string
+        passportExpiryDate:
+          format: date
+          type: string
+        passportIssuer:
+          type: string
+        fullName:
+          type: string
+    CustomerPassport:
+      description: Passport from a Ocr Xendit
+      type: object
+      properties:
+        country:
+          type: string
+        number:
+          type: string
+        dateOfIssue:
+          format: date
+          type: string
+        dateOfExpiry:
+          format: date
+          type: string
+        issuingAuthority:
+          type: string
+        isTampered:
+          type: boolean
+        tampered:
+          type: boolean
+    CustomerResponse:
+      type: object
+      properties:
+        env:
+          type: string
+        token:
+          type: string
+        user:
+          $ref: '#/components/schemas/Customer'
+        completedTxs:
+          type: array
+          items:
+            $ref: '#/components/schemas/WalletTx'
+        pendingTxs:
+          type: array
+          items:
+            $ref: '#/components/schemas/WalletTx'
+        txnProducts:
+          type: array
+          items:
+            $ref: '#/components/schemas/TxnProduct'
+        txnProperties:
+          type: array
+          items:
+            $ref: '#/components/schemas/TxnProperty'
+        notification:
+          type: array
+          items:
+            $ref: '#/components/schemas/NotificationCustomer'
+        properties:
+          type: array
+          items:
+            $ref: '#/components/schemas/Property'
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/Product'
+        documentPrefix:
+          type: string
+        imagePrefix:
+          type: string
+        topUpInfos:
+          type: array
+          items:
+            $ref: '#/components/schemas/Info'
+    CustomerXendit:
+      description: "Related to Xendit integration. Customer-specific data, e.g. KTP,\
+        \ even if returned from Xendit API, will be put directly in CustomerKyc (pending\
+        \ approval) or Customer (after approved)."
+      type: object
+      properties:
+        ocrKtpId:
+          description: Ocr ID. from response xendit Create Ocr
+          type: string
+          example: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+        ocrKtpResponse:
+          description: Ocr Response. from response CallBack Xendit Ocr
+          type: object
+          additionalProperties:
+            type: object
+        ocrKtpStatus:
+          $ref: '#/components/schemas/XenditStatus'
+        ocrStatus:
+          $ref: '#/components/schemas/XenditStatus'
+        ocrTaxId:
+          description: Ocr ID. from response xendit Create Ocr NPWP
+          type: string
+          example: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+        ocrTaxIdResponse:
+          description: Ocr Response. from response CallBack Xendit Ocr Npwp
+          type: object
+          additionalProperties:
+            type: object
+        ocrTaxIdStatus:
+          $ref: '#/components/schemas/XenditStatus'
+        ocrPassportId:
+          description: Ocr Passport ID. from response xendit Create Ocr
+          type: string
+          example: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+        ocrPassportResponse:
+          description: Ocr Passport Response. from response CallBack Xendit Ocr
+          type: object
+          additionalProperties:
+            type: object
+        ocrPassportStatus:
+          $ref: '#/components/schemas/XenditStatus'
+        kycId:
+          description: Biometric Verification Id. from response xendit Create Biometric
+            Verification
+          type: string
+          example: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+        kycResponse:
+          description: Biometric Verification Response. from response CallBack Xendit
+            Biometric Verification
+          type: object
+          additionalProperties:
+            type: object
+        kycStatus:
+          $ref: '#/components/schemas/XenditStatus'
+        rdfCustomerId:
+          description: Rdf Customer Id. from response xendit Create Rdf Customer
+          type: string
+          example: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+        rdfCustomerResponse:
+          description: Rdf Customer Response. from response CallBack Xendit Rdf Customer
+          type: object
+          additionalProperties:
+            type: object
+        rdfCustomerStatus:
+          $ref: '#/components/schemas/XenditStatus'
+        rdfAccountId:
+          description: Rdf Account Id. from response xendit Create Rdf Account
+          type: string
+          example: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+        rdfAccountResponse:
+          description: Rdf Account Response. from response CallBack Xendit Rdf Account
+          type: object
+          additionalProperties:
+            type: object
+        faceComparisonId:
+          description: Face comparison. from response xendit Create Face comparison
+          type: string
+          example: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+        faceComparisonResponse:
+          description: Face comparison Response. from response CallBack Xendit Face
+            comparison
+          type: object
+          additionalProperties:
+            type: object
+        faceComparisonStatus:
+          $ref: '#/components/schemas/XenditStatus'
+        faceComparisonScore:
+          format: double
+          type: number
+        rdfAccountStatus:
+          $ref: '#/components/schemas/XenditStatus'
+    DashboardResponse:
+      description: Dashboard data.
+      type: object
+      properties:
+        customers:
+          format: int64
+          type: integer
+        properties:
+          format: int64
+          type: integer
+        products:
+          format: int64
+          type: integer
+        fractionalOwnership:
+          format: int64
+          type: integer
+    Data:
+      type: object
+      properties:
+        id:
+          type: string
+        created:
+          type: string
+        updated:
+          type: string
+        status:
+          type: string
+        type:
+          type: string
+        result:
+          $ref: '#/components/schemas/Result'
+        reference_id:
+          type: string
+        failure_reason:
+          type: object
+    Fcm:
+      description: "Firebase Cloud Messaging (FCM) token passed from client, categorized\
+        \ by `kind` (e.g. `A` for Android)."
+      required:
+      - code
+      - kind
+      type: object
+      properties:
+        code:
+          type: string
+          example: (random code)
+        kind:
+          $ref: '#/components/schemas/FcmKind'
+    FcmKind:
+      enum:
+      - A
+      - I
+      - W
+      type: string
+    FixedIncomeBank:
+      description: Banks used in Fixed Income.
+      type: object
+      properties:
+        id:
+          format: int64
+          type: integer
+        code:
+          type: string
+        name:
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+        logo:
+          $ref: '#/components/schemas/Media'
+        description:
+          type: string
+        status:
+          $ref: '#/components/schemas/BankStatus'
+    FractionalOwnership:
+      description: Fractional_ownership.
+      type: object
+      properties:
+        id:
+          format: int64
+          type: integer
+        code:
+          type: string
+        name:
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+        projectValue:
+          type: number
+          example: 2500000000
+        publisher:
+          $ref: '#/components/schemas/Publisher'
+        latitude:
+          format: double
+          type: number
+        longitude:
+          format: double
+          type: number
+        sharedPercentage:
+          format: int32
+          type: integer
+        address:
+          type: string
+        description:
+          type: string
+        kind:
+          $ref: '#/components/schemas/FractionalOwnershipKind'
+        type:
+          $ref: '#/components/schemas/FractionalOwnershipType'
+        status:
+          $ref: '#/components/schemas/FractionalOwnershipStatus'
+        startAt:
+          format: date-time
+          type: string
+        endAt:
+          format: date-time
+          type: string
+        quota:
+          format: int32
+          type: integer
+        participant:
+          format: int32
+          type: integer
+        maxOrder:
+          format: int32
+          type: integer
+        minOrder:
+          format: int32
+          type: integer
+        minDividend:
+          type: number
+        maxDividend:
+          type: number
+        periodDividend:
+          format: int32
+          type: integer
+        youtube:
+          type: string
+        prospectus:
+          $ref: '#/components/schemas/Media'
+        medias:
+          description: "Photos attached to this property. Use the other API to add\
+            \ photos. Once added, rearrange/delete photos by modifying this list."
+          type: array
+          items:
+            $ref: '#/components/schemas/Media'
+        participantPercentage:
+          format: int32
+          type: integer
+    FractionalOwnershipKind:
+      enum:
+      - P
+      type: string
+    FractionalOwnershipStatus:
+      enum:
+      - 0
+      - 50
+      - 100
+      - 200
+      - 201
+      - 202
+      - 400
+      type: string
+    FractionalOwnershipType:
+      enum:
+      - S
+      - U
+      - B
+      type: string
+    Gender:
+      enum:
+      - M
+      - F
+      type: string
+    Info:
+      description: Copy in the app that needs to be loaded from the server (not hardcoded).
+      type: object
+      properties:
+        id:
+          format: int64
+          type: integer
+        code:
+          type: string
+        name:
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+        active:
+          type: boolean
+        logo:
+          $ref: '#/components/schemas/Media'
+        kind:
+          $ref: '#/components/schemas/InfoKind'
+        items:
+          description: Items.
+          type: array
+          items:
+            $ref: '#/components/schemas/InfoItem'
+    InfoItem:
+      description: Item for the info.
+      required:
+      - title
+      - content
+      type: object
+      properties:
+        title:
+          type: string
+          example: Mobile Banking
+        content:
+          type: string
+          example: Access your **mobile banking app** from your mobile phone.
+    InfoKind:
+      enum:
+      - TUB
+      - RSD
+      type: string
+    InputPart:
+      type: object
+      properties:
+        headers:
+          $ref: '#/components/schemas/MultivaluedMapStringString'
+        bodyAsString:
+          type: string
+        mediaType:
+          $ref: '#/components/schemas/MediaType'
+        contentTypeFromMessage:
+          type: boolean
+    InstallmentProduct:
+      description: Product Installment transaction.
+      type: object
+      properties:
+        id:
+          format: int64
+          type: integer
+        code:
+          type: string
+        tenorAt:
+          format: int32
+          description: Tenor at
+          type: integer
+          example: 1
+        payment:
+          description: Payment per Monthly
+          type: integer
+          example: 333333
+        dueDate:
+          format: date
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+        status:
+          $ref: '#/components/schemas/InstallmentStatus'
+    InstallmentProperty:
+      description: Property Installment transaction.
+      type: object
+      properties:
+        id:
+          format: int64
+          type: integer
+        code:
+          type: string
+        tenorAt:
+          format: int32
+          description: Tenor at
+          type: integer
+          example: 1
+        payment:
+          description: Payment per Monthly
+          type: integer
+          example: 333333
+        dueDate:
+          format: date
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+        status:
+          $ref: '#/components/schemas/InstallmentStatus'
+    InstallmentStatus:
+      enum:
+      - 0
+      - 100
+      - 200
+      - 400
+      type: string
+    JobIndustry:
+      enum:
+      - PRIVATE_SECTOR_EMPLOYEE
+      - STATE_OWNED_ENTERPRISE_EMPLOYEE
+      - NATIONAL_MILITARY_OR_POLICE_OFFICER
+      - BUSINESS_OWNER
+      - TRADER
+      - FARMER_OR_FISHERMAN
+      - STUDENT
+      - HOUSEWIFE
+      - HOUSEWIFE
+      - EMPLOYEE
+      - ENTREPRENEUR
+      - STATE_OFFICIAL
+      - ACCOUNTANT
+      - LAWYER_OR_NOTARY
+      - PROFESSION
+      - RETIREE
+      - PRIVATE_LECTURER _OR_TEACHER
+      - PUBLIC_LECTURER_OR_TEACHER
+      - DOCTOR
+      - BNI_EMPLOYEE
+      - BNI_AFFILIATE_UNIT
+      - BNI_AFFILIATE_UNIT
+      - OTHER
+      type: string
+    KycApprovalRequest:
+      type: object
+      properties:
+        code:
+          type: string
+        status:
+          $ref: '#/components/schemas/XenditStatus'
+        remark:
+          type: string
+    Lender:
+      description: Lender.
+      type: object
+      properties:
+        id:
+          format: int64
+          type: integer
+        code:
+          type: string
+        name:
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+        logo:
+          $ref: '#/components/schemas/Media'
+        description:
+          type: string
+        status:
+          $ref: '#/components/schemas/BankStatus'
+        possibleApproval:
+          format: int32
+          type: integer
+        fixInterest:
+          type: number
+        fixInterestDuration:
+          format: int32
+          type: integer
+        cost:
+          format: int32
+          type: integer
+        currentVarInterest:
+          type: number
+        processTime:
+          format: int32
+          type: integer
+        lateFee:
+          format: int32
+          type: integer
+        acceleratedFee:
+          format: int32
+          type: integer
+        minSubmissionAge:
+          format: int32
+          type: integer
+        minLoan:
+          format: int32
+          type: integer
+        costDetails:
+          type: string
+        termConditions:
+          type: string
+        aprValue:
+          type: number
+        estimatedMonthlyInstallment:
+          format: int32
+          type: integer
+        estimatedTotalLoans:
+          type: integer
+        needLoanHistoryFromAnotherBank:
+          type: boolean
+    Marital:
+      enum:
+      - S
+      - M
+      - WM
+      - WF
+      type: string
+    Media:
+      description: "Uploaded media (pictures, documents, etc)."
+      type: object
+      properties:
+        kind:
+          $ref: '#/components/schemas/MediaKind'
+        filename:
+          type: string
+        url:
+          type: string
+    MediaKind:
+      enum:
+      - JPG
+      - PDF
+      - PNG
+      - WEBP
+      type: string
+    MediaType:
+      type: object
+      properties:
+        type:
+          type: string
+        subtype:
+          type: string
+        parameters:
+          type: object
+          additionalProperties:
+            type: string
+        wildcardType:
+          type: boolean
+        wildcardSubtype:
+          type: boolean
+    MenuAuthority:
+      description: Menu Authority.
+      type: object
+      properties:
+        id:
+          format: int64
+          type: integer
+        code:
+          type: string
+        name:
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+        description:
+          type: string
+    MenuAuthorityList:
+      type: object
+      properties:
+        menuAuthority:
+          $ref: '#/components/schemas/MenuAuthorityRequest'
+        create:
+          type: boolean
+        update:
+          type: boolean
+        view:
+          type: boolean
+        delete:
+          type: boolean
+    MenuAuthorityRequest:
+      type: object
+      properties:
+        id:
+          format: int64
+          type: integer
+        code:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+    MultipartFormDataInput:
+      type: object
+      properties:
+        parts:
+          type: array
+          items:
+            $ref: '#/components/schemas/InputPart'
+        preamble:
+          type: string
+        formDataMap:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              $ref: '#/components/schemas/InputPart'
+    MultivaluedMapStringString:
+      type: object
+      additionalProperties:
+        type: array
+        items:
+          type: string
+    NotificationCustomer:
+      description: Notification Customer.
+      type: object
+      properties:
+        id:
+          format: int64
+          type: integer
+        code:
+          type: string
+        title:
+          type: string
+        message:
+          type: string
+        read:
+          type: boolean
+        codeKind:
+          type: string
+        media:
+          $ref: '#/components/schemas/Media'
+        createdAt:
+          format: date-time
+          type: string
+        kind:
+          $ref: '#/components/schemas/NotificationKind'
+        customer:
+          $ref: '#/components/schemas/Customer'
+    NotificationKind:
+      enum:
+      - W
+      - T
+      - P
+      - I
+      - A
+      - "N"
+      type: string
+    NotificationResponseCustomer:
+      type: object
+      properties:
+        title:
+          type: string
+        message:
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+        customer:
+          $ref: '#/components/schemas/Customer'
+        read:
+          type: boolean
+        media:
+          $ref: '#/components/schemas/Media'
+        code:
+          type: string
+        kind:
+          $ref: '#/components/schemas/NotificationKind'
+        codeKind:
+          type: string
+    NotificationResponseStaff:
+      type: object
+      properties:
+        title:
+          type: string
+        message:
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+        staff:
+          $ref: '#/components/schemas/Staff'
+        read:
+          type: boolean
+        media:
+          $ref: '#/components/schemas/Media'
+        code:
+          type: string
+        kind:
+          $ref: '#/components/schemas/NotificationKind'
+        codeKind:
+          type: string
+    NotificationStaff:
+      description: Notification Staff.
+      type: object
+      properties:
+        id:
+          format: int64
+          type: integer
+        code:
+          type: string
+        title:
+          type: string
+        message:
+          type: string
+        read:
+          type: boolean
+        codeKind:
+          type: string
+        media:
+          $ref: '#/components/schemas/Media'
+        createdAt:
+          format: date-time
+          type: string
+        kind:
+          $ref: '#/components/schemas/NotificationKind'
+        staff:
+          $ref: '#/components/schemas/Staff'
+    OcrCallbackRequest:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/Data'
+    OpenAccountReason:
+      enum:
+      - INVESTMENTS
+      - SAVINGS
+      - TRANSACTIONS
+      type: string
+    PaymentKind:
+      enum:
+      - INVESTMENT
+      - INSTALLMENT
+      type: string
+    PaymentRequest:
+      type: object
+      properties:
+        code:
+          type: string
+        kind:
+          $ref: '#/components/schemas/PaymentKind'
+        price:
+          type: integer
+    Permission:
+      type: object
+      properties:
+        id:
+          format: int64
+          type: integer
+        code:
+          type: string
+        name:
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+        description:
+          type: string
+    Product:
+      description: Fixed income product.
+      type: object
+      properties:
+        id:
+          format: int64
+          type: integer
+        code:
+          type: string
+        name:
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+        logo:
+          $ref: '#/components/schemas/Media'
+        status:
+          $ref: '#/components/schemas/ProductStatus'
+        arranger:
+          type: string
+        type:
+          type: string
+        custodian:
+          $ref: '#/components/schemas/FixedIncomeBank'
+        monitoring:
+          $ref: '#/components/schemas/FixedIncomeBank'
+        launchedDate:
+          format: date
+          type: string
+        kseiNumber:
+          description: Kustodian Sentral Efek Indonesia (KSEI) number
+          type: string
+          example: "18924892298492"
+        amount:
+          type: integer
+          example: 2500000000
+        quota:
+          type: integer
+          example: 2500000000
+        min:
+          type: integer
+          example: 150000000
+        max:
+          type: integer
+          example: 250000000
+        interest:
+          description: Interest rate (p.a)
+          type: number
+          example: 0.12
+        tenor:
+          format: int32
+          description: Tenor
+          type: integer
+          example: 36
+        disclaimer:
+          type: string
+        prospectus:
+          $ref: '#/components/schemas/Media'
+        factSheet:
+          $ref: '#/components/schemas/Media'
+    ProductStatus:
+      enum:
+      - 0
+      - 200
+      - 400
+      type: string
+    Property:
+      description: Property.
+      type: object
+      properties:
+        id:
+          format: int64
+          type: integer
+        code:
+          type: string
+        name:
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+        price:
+          type: integer
+          example: 2500000000
+        villaCategory:
+          type: string
+        buildingSize:
+          format: int32
+          description: Building size (m²)
+          type: integer
+          example: 439
+        poolSize:
+          format: int32
+          description: Pool size (m²)
+          type: integer
+          example: 77
+        floor:
+          format: int32
+          description: Floor
+          type: integer
+          example: 2
+        landSize:
+          format: int32
+          description: Land size (m²)
+          type: integer
+          example: 625
+        address:
+          type: string
+        location:
+          type: string
+        description:
+          type: string
+        status:
+          $ref: '#/components/schemas/PropertyStatus'
+        kind:
+          $ref: '#/components/schemas/PropertyKind'
+        titleKind:
+          $ref: '#/components/schemas/TitleKind'
+        bedrooms:
+          format: int32
+          description: Number of bedrooms
+          type: integer
+          example: 3
+        bathrooms:
+          format: int32
+          description: Number of bathrooms
+          type: integer
+          example: 2
+        youtube:
+          type: string
+        medias:
+          description: "Photos attached to this property. Use the other API to add\
+            \ photos. Once added, rearrange/delete photos by modifying this list."
+          type: array
+          items:
+            $ref: '#/components/schemas/Media'
+    PropertyKind:
+      enum:
+      - H
+      - T
+      - C
+      - V
+      type: string
+    PropertyStatus:
+      enum:
+      - 0
+      - 200
+      - 201
+      - 400
+      type: string
+    PropertySupportResponse:
+      description: Support data for property details.
+      type: object
+      properties:
+        lenders:
+          type: array
+          items:
+            $ref: '#/components/schemas/Lender'
+    Publisher:
+      description: Company Use in FO
+      type: object
+      properties:
+        id:
+          format: int64
+          type: integer
+        code:
+          type: string
+        name:
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+        logo:
+          $ref: '#/components/schemas/Media'
+        description:
+          type: string
+        status:
+          $ref: '#/components/schemas/BankStatus'
+        email:
+          type: string
+        address:
+          type: string
+        website:
+          type: string
+    RdfSupportResponse:
+      description: Support data for RDF account creation.
+      type: object
+      properties:
+        company:
+          type: array
+          items:
+            $ref: '#/components/schemas/InfoItem'
+        job:
+          type: array
+          items:
+            $ref: '#/components/schemas/InfoItem'
+        education:
+          type: array
+          items:
+            $ref: '#/components/schemas/InfoItem'
+        income:
+          type: array
+          items:
+            $ref: '#/components/schemas/InfoItem'
+        branch:
+          type: array
+          items:
+            $ref: '#/components/schemas/InfoItem'
+        reason:
+          type: array
+          items:
+            $ref: '#/components/schemas/InfoItem'
+        source:
+          type: array
+          items:
+            $ref: '#/components/schemas/InfoItem'
+        tnc:
+          type: string
+    Religion:
+      enum:
+      - IS
+      - CH
+      - CA
+      - HI
+      - BU
+      - CO
+      type: string
+    Result:
+      type: object
+      properties:
+        name:
+          type: string
+        address:
+          type: string
+        id_card_number:
+          type: string
+        city:
+          type: string
+        rtrw:
+          type: string
+        gender:
+          type: string
+        village:
+          type: string
+        district:
+          type: string
+        province:
+          type: string
+        religion:
+          type: string
+        birthdate:
+          type: string
+        birthplace:
+          type: string
+        occupation:
+          type: string
+        expiry_date:
+          type: string
+        marital_status:
+          type: string
+        tax_id_number:
+          type: string
+        registration_office:
+          type: string
+        country:
+          type: string
+        passport_number:
+          type: string
+        given_name:
+          type: string
+        surname:
+          type: string
+        date_of_issue:
+          type: string
+        date_of_expiry:
+          type: string
+        issuing_authority:
+          type: string
+        is_tampered:
+          type: string
+    Role:
+      type: object
+      properties:
+        id:
+          format: int64
+          type: integer
+        code:
+          type: string
+        name:
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+        description:
+          type: string
+        permissions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Permission'
+        menuAuthority:
+          type: array
+          items:
+            $ref: '#/components/schemas/MenuAuthorityList'
+    Salutation:
+      enum:
+      - MR
+      - MRS
+      - MS
+      type: string
+    SourceOfFund:
+      enum:
+      - SALARY
+      - BUSINESS
+      - INVESTMENT
+      - GRANTS
+      type: string
+    Staff:
+      description: Staff.
+      required:
+      - country
+      - locale
+      - timezone
+      type: object
+      properties:
+        id:
+          format: int64
+          type: integer
+        code:
+          type: string
+        name:
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+        email:
+          type: string
+          example: thomas@wiradikusuma.com
+        mobile:
+          description: "Prefixed with country code, without plus sign."
+          type: string
+          example: "6288812345"
+        country:
+          type: string
+          example: ID
+        salutation:
+          $ref: '#/components/schemas/Salutation'
+        locale:
+          description: Language code.
+          maxLength: 20
+          type: string
+          example: en
+        timezone:
+          description: Timezone in the format understood by Java.
+          maxLength: 50
+          type: string
+          example: Asia/Jakarta
+        fcms:
+          type: array
+          items:
+            $ref: '#/components/schemas/Fcm'
+        readOnly:
+          type: boolean
+        status:
+          $ref: '#/components/schemas/StaffStatus'
+        roles:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/Role'
+    StaffResponse:
+      type: object
+      properties:
+        env:
+          type: string
+        token:
+          type: string
+        user:
+          $ref: '#/components/schemas/Staff'
+        properties:
+          type: array
+          items:
+            $ref: '#/components/schemas/Property'
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/Product'
+        documentPrefix:
+          type: string
+        imagePrefix:
+          type: string
+    StaffStatus:
+      enum:
+      - 0
+      - 200
+      - 400
+      type: string
+    TitleKind:
+      enum:
+      - SHM
+      - HGB
+      - G
+      - AJB
+      type: string
+    TxnProduct:
+      description: Fixed income transaction.
+      type: object
+      properties:
+        id:
+          format: int64
+          type: integer
+        code:
+          type: string
+        product:
+          $ref: '#/components/schemas/Product'
+        customer:
+          $ref: '#/components/schemas/Customer'
+        deposit:
+          description: Deposit
+          type: integer
+          example: 1000000000
+        snapshot:
+          allOf:
+          - $ref: '#/components/schemas/Product'
+          - description: Snapshot of the product for this transaction.
+        createdAt:
+          format: date-time
+          type: string
+        status:
+          $ref: '#/components/schemas/TxnProductStatus'
+    TxnProductRequest:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/TxnProductStatus'
+    TxnProductStatus:
+      enum:
+      - 0
+      - 200
+      - 400
+      type: string
+    TxnProperty:
+      description: Property transaction.
+      type: object
+      properties:
+        id:
+          format: int64
+          type: integer
+        code:
+          type: string
+        property:
+          $ref: '#/components/schemas/Property'
+        customer:
+          $ref: '#/components/schemas/Customer'
+        deposit:
+          description: Down Payment
+          type: integer
+          example: 1000000000
+        interest:
+          description: Interest rate (p.a) its the percentage
+          type: number
+          example: 6.5
+        tenor:
+          format: int32
+          description: Tenor
+          type: integer
+          example: 36
+        dailyRate:
+          description: Rental daily rate
+          type: integer
+          example: 3000000
+        occupancyRate:
+          description: Rental occupancy rate
+          type: number
+          example: 60
+        rentalPrice:
+          description: Rental rate net Price
+          type: integer
+          example: 53000000
+        snapshot:
+          allOf:
+          - $ref: '#/components/schemas/Property'
+          - description: Snapshot of the property for this transaction.
+        createdAt:
+          format: date-time
+          type: string
+        status:
+          $ref: '#/components/schemas/TxnPropertyStatus'
+    TxnPropertyRequest:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/TxnPropertyStatus'
+    TxnPropertyStatus:
+      enum:
+      - 0
+      - 10
+      - 20
+      - 30
+      - 40
+      - 50
+      - 60
+      - 70
+      - 200
+      - 201
+      - 400
+      type: string
+    Wallet:
+      description: Wallet.
+      type: object
+      properties:
+        id:
+          format: int64
+          type: integer
+        code:
+          type: string
+        name:
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+        balance:
+          description: Balance
+          type: number
+          example: "10,000,000"
+        kind:
+          $ref: '#/components/schemas/WalletKind'
+        accountNumber:
+          type: string
+    WalletKind:
+      enum:
+      - M
+      - R
+      type: string
+    WalletRequest:
+      type: object
+      properties:
+        amount:
+          type: number
+        endpoint:
+          $ref: '#/components/schemas/WalletTxEndpoint'
+    WalletTx:
+      description: Wallet transaction.
+      type: object
+      properties:
+        id:
+          format: int64
+          type: integer
+        code:
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+        status:
+          $ref: '#/components/schemas/WalletTxStatus'
+        kind:
+          $ref: '#/components/schemas/WalletTxKind'
+        amount:
+          description: Amount
+          type: number
+          example: "10,000,000"
+        walletKind:
+          $ref: '#/components/schemas/WalletKind'
+        source:
+          allOf:
+          - $ref: '#/components/schemas/WalletTxEndpoint'
+          - description: "Details for the source. If it is the customer's RDF account,\
+              \ it will be null."
+        destination:
+          allOf:
+          - $ref: '#/components/schemas/WalletTxEndpoint'
+          - description: "Details for the destination. If it is the customer's RDF\
+              \ account, it will be null."
+        evidence:
+          $ref: '#/components/schemas/Media'
+    WalletTxEndpoint:
+      type: object
+      properties:
+        bank:
+          description: Bank name. Must be a valid `Bank.code`
+          type: string
+          example: BCA
+        account:
+          description: Account number
+          type: string
+          example: "1234567890"
+        name:
+          description: Name of the account holder
+          type: string
+          example: Bruce Wayne
+    WalletTxKind:
+      enum:
+      - T
+      - W
+      - P
+      - I
+      - J
+      - D
+      type: string
+    WalletTxStatus:
+      enum:
+      - 0
+      - 200
+      - 400
+      type: string
+    WithdrawalBank:
+      description: List of banks to choose when customers create a bank account.
+      type: object
+      properties:
+        id:
+          format: int64
+          type: integer
+        code:
+          type: string
+        name:
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+        logo:
+          $ref: '#/components/schemas/Media'
+        description:
+          type: string
+        status:
+          $ref: '#/components/schemas/BankStatus'
+    XenditStatus:
+      enum:
+      - 0
+      - 50
+      - 100
+      - 200
+      - 400
+      - 450
+      type: string
+  securitySchemes:
+    SecurityScheme:
+      type: http
+      description: Authentication
+      scheme: bearer
+      bearerFormat: JWT
