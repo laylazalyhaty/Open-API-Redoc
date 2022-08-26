@@ -1,8 +1,12 @@
 ---
 openapi: 3.0.3
 info:
-  title: core API
-  version: 1.0.0-SNAPSHOT
+  title: Briix Financial Technology
+  version: v1.0.0
+  x-logo:
+    url: "https://res.cloudinary.com/ekosutrisno/image/upload/v1661505549/atrium-assets/briix-logo_z71jtx.png"
+    backgroundColor: "#FFFFFF"
+    altText: "Briix logo"
 paths:
   /api/admin/v1/auth:
     get:
