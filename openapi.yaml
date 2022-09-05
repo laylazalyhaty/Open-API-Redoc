@@ -9,7 +9,7 @@ servers:
     description: Production server
     
 info:
-  title: Briix Financial Technology
+  title: Briix Financial
   version: v1.0.0
   x-logo:
     url: "https://res.cloudinary.com/ekosutrisno/image/upload/v1661505947/atrium-assets/brx_eu2epg.png"
