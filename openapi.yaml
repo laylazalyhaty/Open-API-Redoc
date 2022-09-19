@@ -2,7 +2,7 @@
 openapi: 3.0.3
 info:
   title: Briix Documentation API
-  description: |
+  description:
   OpenApi documentation for Briix Application.
   
   #Introduction
