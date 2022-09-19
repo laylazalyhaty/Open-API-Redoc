@@ -1,20 +1,36 @@
 ---
 openapi: 3.0.3
-servers:
-  - url: https://app.test.briix.com
-    description: Testing server
-  - url: https://app.stg.briix.com
-    description: Staging server
-  - url: https://app.briix.com
-    description: Production server
-    
 info:
-  title: Briix Financial
-  version: v1.0.0
+  title: Briix Documentation API
+  description: OpenApi documentation for Briix Application.
+  contact:
+    name: Briix IT Support
+    url: http://briix.com
+    email: it-support@briix.com
+  version: "1"
   x-logo:
     url: "https://res.cloudinary.com/ekosutrisno/image/upload/v1661505947/atrium-assets/brx_eu2epg.png"
     backgroundColor: "#FFFFFF"
     altText: "Briix logo"
+servers:
+- url: https://app.test.briix.com
+  description: Environment Test
+- url: https://app.stg.briix.com
+  description: Environment Staging
+- url: https://app.briix.com
+  description: Environment Production
+tags:
+- name: Authorization Admin
+  description: "Authorization implemented using firebase, mock and check email."
+- name: Customer Admin
+  description: Admin can view and edit data of customer.
+- name: Dashboard Admin
+  description: "Admin can view total data customer that register, product transaction\
+    \ and property transaction."
+- name: Fixed Income Bank Admin
+  description: "Admin can view, add, edit and delete data Fixed Income Bank."
+- name: Fractional Ownership Admin
+  description: "Admin can view, add, edit and delete data Fractional Ownership."
 paths:
   /api/admin/v1/auth:
     get:
