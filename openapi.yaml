@@ -2,7 +2,7 @@
 openapi: 3.0.3
 info:
   title: Briix Documentation API
-  description: OpenApi documentation for Briix Application. Introduction This API is documented in OpenAPI format OpenAPI Specification
+  description: OpenApi documentation for Briix Application.
   contact:
     name: Briix IT Support
     url: http://briix.com
